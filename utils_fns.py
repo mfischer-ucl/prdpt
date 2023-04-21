@@ -30,7 +30,7 @@ def convolve(kernel_fn, render_fn, importance_fn, theta, nsamples, context_args,
         raise NotImplementedError("for now only IS sampler supported")
 
     # get importance-sampled taus
-    tau, pdf = importance_fn(nsamples, sigma, context_args['antithetic'], dim)
+    tau, pdf = importance_fn(nsamples, sigma, context_args['antithetic'], dim, context_args['device'])
 
     # get kernel weight at taus
     weights = kernel_fn(tau, sigma)
@@ -51,12 +51,12 @@ def convolve(kernel_fn, render_fn, importance_fn, theta, nsamples, context_args,
     return forward_output, avg_img
 
 
-def importance_gradgauss(n_samples, sigma, is_antithetic, dim):
+def importance_gradgauss(n_samples, sigma, is_antithetic, dim, device):
     eps = 0.00001
-    randoms = torch.rand(n_samples, dim).cuda()
+    randoms = torch.rand(n_samples, dim).to(device)
 
     def icdf(x, sigma):
-        res = torch.zeros_like(x)
+        res = torch.zeros_like(x).to(device)
         res[mask == 1] = torch.sqrt(-2.0 * sigma ** 2 * torch.log(2.0 * (1.0 - x[mask == 1])))
         res[mask == -1] = torch.sqrt(-2.0 * sigma ** 2 * torch.log(2.0 * x[mask == -1]))
         return res
@@ -76,7 +76,7 @@ def importance_gradgauss(n_samples, sigma, is_antithetic, dim):
 
     f_xi = torch.abs(x_i) * (1.0 / sigma ** 2) * calc_gauss(x_i, mu=0.0, sigma=sigma)
     f_xi[f_xi == 0] += eps
-    p_xi = 0.5 * sigma * np.sqrt(2.0 * np.pi) * f_xi
+    p_xi = 0.5 * sigma * (2.0 * np.pi)**0.5 * f_xi
 
     return x_i, p_xi
 

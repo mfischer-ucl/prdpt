@@ -6,7 +6,8 @@ from utils_optim import run_optimization
 from utils_general import run_scheduler_step
 from utils_mitsuba import setup_shadowscene
 
-mi.set_variant('cuda_ad_rgb')
+if torch.cuda.is_available():
+    mi.set_variant('cuda_ad_rgb')
 
 
 def apply_translation(theta, p, mat_id, init_vpos):
