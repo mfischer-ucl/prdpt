@@ -1,0 +1,87 @@
+<scene version="3.0.0">
+
+<!-- Defaults, these can be set via the command line: -Darg=value -->
+
+	<default name="spp" value="4096"/>
+	<default name="resx" value="resolution_x"/>
+	<default name="resy" value="resolution_y"/>
+
+<!-- Camera and Rendering Parameters -->
+
+	<integrator type="integrator_type">
+		<integer name="max_depth" value="depth_value"/>
+		<integer name="reparam_max_depth" value="reparam_depth_value"/>
+	</integrator>
+	<sensor type="perspective">
+		<string name="fov_axis" value="x"/>
+		<float name="fov" value="39.597755"/>
+		<float name="principal_point_offset_x" value="0.000000"/>
+		<float name="principal_point_offset_y" value="-0.000000"/>
+		<float name="near_clip" value="0.100000"/>
+		<float name="far_clip" value="100.000000"/>
+		<transform name="to_world">
+			<rotate x="1" angle="-359.999982697156"/>
+			<rotate y="1" angle="-90.00000250447816"/>
+			<translate value="17.658024 -0.000010 0.000007"/>
+		</transform>
+		<sampler type="independent">
+			<integer name="sample_count" value="$spp"/>
+		</sampler>
+		<film type="hdrfilm">
+			<integer name="width" value="$resx"/>
+			<integer name="height" value="$resy"/>
+			<boolean name="sample_border" value="true"/>
+		</film>
+	</sensor>
+
+<!-- Materials -->
+
+	<bsdf type="plastic" id="mat-Material.001">
+		<texture name="diffuse_reflectance" type="bitmap">
+			<string name="filename" value="textures/grid_50.png" />
+			<string name="filter_type" value="bilinear" />
+		</texture>
+		<rgb name="specular_reflectance" value="0.0, 0.0, 0.0"/>
+	</bsdf>
+
+	<bsdf type="twosided" id="mat-Material.003">
+		<bsdf type="principled">
+			<rgb value="0.800000 0.261964 0.041545" name="base_color"/>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.500000"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.173205"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
+
+<!-- Emitters -->
+
+	<emitter type="constant">
+    	<rgb name="radiance" value="0.6 0.6 0.99"/>
+	</emitter>
+
+	<emitter type="point">
+		<point name="position" x="25.9752197265625" y="13.775799751281738" z="0.0"/>
+		<rgb value="1715.0 1715.0 1715.0" name="intensity"/>
+	</emitter>
+
+<!-- Shapes -->
+
+	<shape type="ply">
+		<string name="filename" value="meshes/Plane.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-Material.001" name="bsdf"/>
+	</shape>
+	<shape type="ply">
+		<string name="filename" value="meshes/Sphere_001.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-Material.003" name="bsdf"/>
+	</shape>
+
+</scene>
