@@ -38,11 +38,11 @@ i.e., the importance sampler and kernel functions, reside in `utils_fns.py`.  We
 
 #### Running your own experiments
 To run your own optimizations, simply provide a Mitsuba scene and extract the information needed
-for your use case (cf. `setup_shadowscene.py`). You will also need to adapt the `update_fn` to update the scene 
-parameters accordingly (e.g., to apply rotation instead of translation). 
+for your use case (as in `setup_shadowscene.py`). You will also need to adapt the `update_fn` to update the scene 
+parameters accordingly, e.g., to apply rotation instead of translation). 
 
 If you want to use a different rendering engine, replace the function `get_mts_rendering` with your own 
-rendering function. An example of this is provided in the [colab notebook](https://colab.research.google.com/github/mfischer-ucl/prdpt/blob/main/examples/box_example.ipynb) under `examples/box_position.ipynb`.
+rendering function. An example of this is provided in the [colab notebook](https://colab.research.google.com/github/mfischer-ucl/prdpt/blob/main/examples/box_example.ipynb) under `examples/box_position.ipynb`, where we use a simple rectangle-renderer. 
 You can make use of the `ctx_args` dict to pass data between function calls. 
 
 ___
