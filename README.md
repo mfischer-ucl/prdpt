@@ -43,7 +43,7 @@ parameters accordingly (e.g., to apply rotation instead of translation).
 
 If you want to use a different rendering engine, replace the function `get_mts_rendering` with your own 
 rendering function. An example of this is provided in the [colab notebook](https://colab.research.google.com/github/mfischer-ucl/prdpt/blob/main/examples/box_example.ipynb) under `examples/box_position.ipynb`.
-You can make use of the `ctx_args` dict to pass data between function calls.  
+You can make use of the `ctx_args` dict to pass data between function calls. 
 
 ___
 ### License 

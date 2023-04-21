@@ -40,7 +40,7 @@ def run_optimization(hparams,
         start = time.time()
         optim.zero_grad()
 
-        loss, img_avg = perturbed_mts(theta.unsqueeze(0), ctx_args)
+        loss, _ = perturbed_mts(theta.unsqueeze(0), ctx_args)
         loss.backward()
 
         optim.step()
@@ -57,8 +57,6 @@ def run_optimization(hparams,
 
         # logging, timing, plotting, etc...
         with torch.no_grad():
-
-            img_avg = img_avg.detach().cpu()
 
             # calc loss btwn rendering with current parameter (non-blurred)
             img_curr = get_mts_rendering(theta, update_fn, ctx_args)
