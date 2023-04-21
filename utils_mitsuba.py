@@ -60,7 +60,7 @@ def create_scene_from_xml(xmlpath, resx=512, resy=512, integrator='path', maxdep
 
 
 def setup_shadowscene(hparams):
-    xmlpath = '../scenes/shadows/shadows.xml'
+    xmlpath = 'scenes/shadows/shadows.xml'
     scene = create_scene_from_xml(xmlpath, resx=hparams['resx'], resy=hparams['resy'], integrator=hparams['integrator'],
                                   maxdepth=hparams['max_depth'], reparam_max_depth=hparams['reparam_max_depth'])
     params = mi.traverse(scene)

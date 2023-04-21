@@ -1,5 +1,0 @@
-drjit==0.4.1
-matplotlib==3.7.1
-mitsuba==3.2.1
-numpy==1.20.3
-torch==1.11.0
