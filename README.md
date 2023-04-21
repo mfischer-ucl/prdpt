@@ -9,7 +9,7 @@ For more information, make sure to check out the [paper](https://arxiv.org/pdf/2
 and [project page](https://mfischer-ucl.github.io/prdpt/).
 
 <p align="center">
- <img src="./assets/optim.gif" width="75%" height="37.5%" />
+ <img src="./assets/optim.gif" width="95%"/>
 </p>
 
 ___
@@ -28,7 +28,7 @@ pip install torch torchvision torchaudio
 
 You should then be able to run the example in `examples/sphere_example.py`.  
 
-Tested with Python 3.9, PyTorch 1.11 and CUDA 11.3 on Ubuntu 20.04.4 x64 and an NVIDIA RTX3000 series GPU.   
+Tested with Python 3.9, PyTorch 2.0 and CUDA 11.7 on Ubuntu 20.04.4 x64 and an NVIDIA RTX3000 series GPU.   
 ___
 ### Usage 
 
@@ -37,12 +37,13 @@ i.e., the importance sampler and kernel functions, reside in `utils_fns.py`.  We
 `examples/sphere_example.py`. The main function running the optimization routine is `run_optimization.py`.   
 
 #### Running your own experiments
-To run your own optimizations, simply provide a Mitsuba scene (usually via xml) and extract the information needed
+To run your own optimizations, simply provide a Mitsuba scene and extract the information needed
 for your use case (cf. `setup_shadowscene.py`). You will also need to adapt the `update_fn` to update the scene 
-parameters accordingly. 
+parameters accordingly (e.g., to apply rotation instead of translation). 
 
 If you want to use a different rendering engine, replace the function `get_mts_rendering` with your own 
-rendering function. An example of this is provided in the colab notebook. 
+rendering function. An example of this is provided in the [colab notebook](https://colab.research.google.com/github/mfischer-ucl/prdpt/blob/main/examples/box_example.ipynb) under `examples/box_position.ipynb`.
+You can make use of the `ctx_args` dict to pass data between function calls.  
 
 ___
 ### License 
