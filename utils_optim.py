@@ -72,7 +72,7 @@ def run_optimization(hparams,
                     plt_errors(img_errors, param_errors, title=f'Ep {j+1}')
 
             pstring = ' - CurrentParam: {}'.format(theta.tolist()) if print_param else ''
-            print(f"Iter {j + 1}, ParamLoss: {param_errors[-1]:.6f}, "
+            print(f"Iter {j + 1}/{hparams['epochs']}, ParamLoss: {param_errors[-1]:.6f}, "
                   f"ImageLoss: {img_errors[-1]:.8f} - Time: {iter_time:.4f}{pstring}")
 
     plt_errors(img_errors, param_errors, title=f'Final, after {hparams["epochs"]} iterations')
