@@ -1,5 +1,5 @@
-import time 
-import torch 
+import time
+import torch
 import utils_fns
 
 from utils_general import show_with_error, plt_errors
@@ -24,9 +24,9 @@ def run_optimization(hparams,
     ctx_args['gt_image'] = reference_image
 
     # --------------- set up smoothed renderer
-    perturbed_mts = utils_fns.smoothFn(render_smooth,
-                                       context_args=None,
-                                       device=ctx_args['device'])
+    smooth_mts = utils_fns.smoothFn(render_smooth,
+                                    context_args=None,
+                                    device=ctx_args['device'])
 
     if plot_initial:
         show_with_error(initial_image, reference_image, 0)
@@ -40,7 +40,7 @@ def run_optimization(hparams,
         start = time.time()
         optim.zero_grad()
 
-        loss, _ = perturbed_mts(theta.unsqueeze(0), ctx_args)
+        loss, _ = smooth_mts(theta.unsqueeze(0), ctx_args)
         loss.backward()
 
         optim.step()
@@ -69,7 +69,7 @@ def run_optimization(hparams,
                 show_with_error(img_curr, ctx_args['gt_image'], j)
 
                 if len(param_errors) > 1:
-                    plt_errors(img_errors, param_errors, title=f'Ep {j+1}')
+                    plt_errors(img_errors, param_errors, title=f'Ep {j + 1}')
 
             pstring = ' - CurrentParam: {}'.format(theta.tolist()) if print_param else ''
             print(f"Iter {j + 1}/{hparams['epochs']}, ParamLoss: {param_errors[-1]:.6f}, "
@@ -78,5 +78,3 @@ def run_optimization(hparams,
     plt_errors(img_errors, param_errors, title=f'Final, after {hparams["epochs"]} iterations')
     show_with_error(img_curr, ctx_args['gt_image'], hparams['epochs'])
     print("Done.")
-
-
