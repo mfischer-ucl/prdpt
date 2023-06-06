@@ -54,10 +54,11 @@ ___
 If you find our work useful or plan to (re-) use parts of it in your own projects, please include the following citation:
 
 ```
-@article{fischer2022plateau,
-  title={Plateau-reduced Differentiable Path Tracing},
+@inproceedings{fischer2023plateau,
+  title={Plateau-Reduced Differentiable Path Tracing},
   author={Fischer, Michael and Ritschel, Tobias},
-  journal={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  year={2022}
-} 
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={4285--4294},
+  year={2023}
+}
 ```
